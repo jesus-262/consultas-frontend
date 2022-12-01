@@ -396,6 +396,32 @@ function App() {
 
       </div>
       <div className="container">
+   
+
+<div className="alert alert-primary" role="alert">
+<div className="d-flex justify-content-between">
+<div className="" role="alert">
+NOMBRE COMPLETO / <a className="alert-link">{nombre}</a>
+</div>
+<div className="card" style={{width: '18rem'}}>
+  <ul className="list-group list-group-flush">
+    <li className="list-group-item">CEDULA / {lugar[0]} </li>
+    <li className="list-group-item">DEPARTAMENTO / {lugar[1]}</li>
+    <li className="list-group-item">MUNICIPIO / {lugar[2]}</li>
+  </ul>
+</div>
+
+<div className="card" style={{width: '18rem'}}>
+  <ul className="list-group list-group-flush">
+    <li className="list-group-item">PUESTO / {lugar[3]}</li>
+    <li className="list-group-item">DIRECCION / {lugar[4]}</li>
+    <li className="list-group-item">MESA / {lugar[5]}</li>
+  </ul>
+</div>
+</div>
+</div>
+
+
         <table className="table">
           <thead className="table table-striped table-dark">
             <tr>
@@ -411,21 +437,8 @@ function App() {
           </thead>
           <tbody>
 
-            <tr className="table-info " style={{ height: '60px' }}>
-
-              <th scope="row " >{nombre}</th>
-              <td>{lugar[0]}</td>
-              <td>{lugar[1]}</td>
-              <td>{lugar[2]}</td>
-              <td>{lugar[3]}</td>
-              <td>{lugar[4]}</td>
-              <td>{lugar[5]}</td>
-              <td></td>
-
-            </tr>
-
             {persona.map((persona) => (
-              <><br></br>
+              
                 <tr key={persona.id} >
 
                   <th>{persona.nombrecompleto}</th>
@@ -447,7 +460,7 @@ function App() {
                   </td>
 
                 </tr>
-              </>))}
+              ))}
 
           </tbody>
         </table>
