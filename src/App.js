@@ -218,7 +218,7 @@ function App() {
       }
       if (estadol == false && estadon == true) {
         openModal();
-        setmodalmensaje("Buscando Nombre, espere unos segundos...");
+        setmodalmensaje("Buscando nombre, espere unos segundos...");
         setlugar([null, null, null, null, null, null]);
 
         console.log("opción Nombre")
@@ -262,7 +262,7 @@ function App() {
         var estado = 0;
         console.log("Las dos opciones")
         openModal();
-        setmodalmensaje("Buscando Nombre y lugar de votacion, espere unos segundos...");
+        setmodalmensaje("Buscando nombre y lugar de votacion, espere unos segundos...");
 
         console.log("opción Nombre")
         var params = {
