@@ -148,6 +148,7 @@ function App() {
     mostrar();
   }
   const CerrarModal = async () => {
+    setmodalmensajedos("");
     Guardar();
     mostrar();
     closeModal();
