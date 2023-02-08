@@ -9,6 +9,9 @@ function App() {
 
 
   var [cedula, setcedula] = useState("");
+  
+  var [folio, setfolio] = useState("");
+  var [observacion, setobservacion] = useState("");
   var [estadon, setestadon] = useState(false);
   var [estadol, setestadol] = useState(false);
 
@@ -83,7 +86,17 @@ function App() {
     console.log("cedula : " + e.target.value);
     setcedula((cedula = e.target.value));
   };
-
+  const folioChange = async (e) => {
+    e.preventDefault();
+    console.log("folio : " + e.target.value);
+    setfolio((folio =e.target.value));
+  };
+  const observacionChange = async (e) => {
+    e.preventDefault();
+    console.log("observacion : " + e.target.value);
+    setobservacion((observacion =e.target.value));
+  };
+  
   const onChangeNombre = async (e) => {
     console.log("Nombre");
     setestadon(estadon = !estadon);
@@ -95,9 +108,13 @@ function App() {
     console.log(estadol);
   }
   const Guardar = async () => {
+   console.log("folio")
+   console.log(folio)
     var params = {
+      folio,
       nombrecompleto: nombre,
-      cedula: lugar[0],
+      cedula,
+      observacion,
       departamento: lugar[1],
       municipio: lugar[2],
       puesto: lugar[3],
@@ -370,7 +387,18 @@ function App() {
       </div>
       <div className="page-hero d-flex align-items-center justify-content-center">
         <div className="d-flex flex-column bd-highlight mb-3">
-
+        <div className="d-flex flex-row bd-highlight mb-3">
+        <div className="p-2 bd-highlight">
+            <input
+              type="number"
+              className="form-control"
+              placeholder="FOLIO"
+              aria-label="# Placa"
+              aria-describedby="basic-addon1"
+              onChange={folioChange}
+              maxLength="20"
+            ></input>
+          </div>
           <div className="p-2 bd-highlight">
             <input
               type="number"
@@ -381,8 +409,19 @@ function App() {
               onChange={cedulaChange}
               maxLength="20"
             ></input>
+        
           </div>
-
+          <div className="p-2 bd-highlight">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="OBSERVACIONES"
+              aria-label="# Placa"
+              aria-describedby="basic-addon1"
+              onChange={observacionChange}
+              maxLength="20"
+            ></input>
+          </div>
           <div className="p-2 bd-highlight">
             <button
               style={{ width: "100px", height: "100%" }}
@@ -394,7 +433,7 @@ function App() {
             </button>
           </div>
         </div>
-
+        </div>
       </div>
       <div className="container">
    
@@ -426,6 +465,7 @@ NOMBRE COMPLETO / <a className="alert-link">{nombre}</a>
         <table className="table">
           <thead className="table table-striped table-dark">
             <tr>
+              <th scope="col">FOLIO</th>
               <th scope="col">NOMBRE COMPLETO</th>
               <th scope="col">CEDULA</th>
               <th scope="col">DEPARTAMENTO</th>
@@ -433,6 +473,8 @@ NOMBRE COMPLETO / <a className="alert-link">{nombre}</a>
               <th scope="col">PUESTO</th>
               <th scope="col">DIRECCION</th>
               <th scope="col">MESA</th>
+              <th scope="col">CASO</th>
+              <th scope="col">OBSERVACION</th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -441,7 +483,7 @@ NOMBRE COMPLETO / <a className="alert-link">{nombre}</a>
             {persona.map((persona) => (
               
                 <tr key={persona.id} >
-
+                  <th>{persona.folio}</th>
                   <th>{persona.nombrecompleto}</th>
                   <td>{persona.cedula}</td>
                   <td>{persona.departamtento}</td>
@@ -449,7 +491,10 @@ NOMBRE COMPLETO / <a className="alert-link">{nombre}</a>
                   <td>{persona.puesto}</td>
                   <td>{persona.direccion}</td>
                   <td>{persona.mesa}</td>
+                  <td>{persona.caso}</td>
+                  <td>{persona.observacion}</td>
                   <td>
+                    {/* 
                     <button
                       style={{ width: "100px", height: "100%" }}
                       type="button"
@@ -457,7 +502,7 @@ NOMBRE COMPLETO / <a className="alert-link">{nombre}</a>
                       onClick={() => borrar(persona.id)}
                     >
                       ELIMINAR
-                    </button>
+                    </button>*/}
                   </td>
 
                 </tr>
