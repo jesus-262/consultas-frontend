@@ -171,16 +171,35 @@ function App() {
     closeModal();
     setestadoboton(false);
   }
+  const CerrarModal2= async () => {
+    setmodalmensajedos("");
+    closeModal();
+    setestadoboton(false);
+  }
   function renderboton() {
     if (estadoboton == true) {
       return (
         <button
           style={{ width: "100px", height: "100%" }}
           type="button"
-          className="btn btn-dark"
+          className="btn btn-success"
           onClick={() => CerrarModal()}
         >
-          Cerrar
+          Guardar
+        </button>
+      );
+    }
+  }
+  function renderboton2() {
+    if (estadoboton == true) {
+      return (
+        <button
+          style={{ width: "100px", height: "100%" }}
+          type="button"
+          className="btn btn-danger"
+          onClick={() => CerrarModal2()}
+        >
+          Salir
         </button>
       );
     }
@@ -520,6 +539,8 @@ NOMBRE COMPLETO / <a className="alert-link">{nombre}</a>
           <h2>{modalmensaje}</h2>
           <p>{modalmensajedos}</p>
           {renderboton()}
+          {renderboton2()}
+
 
         </Modal>
       </div>
