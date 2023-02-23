@@ -179,6 +179,18 @@ function App() {
   function renderboton() {
     if (estadoboton == true) {
       return (
+        <>
+        <div className="p-2 bd-highlight">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="OBSERVACIONES"
+          aria-label="# Placa"
+          aria-describedby="basic-addon1"
+          onChange={observacionChange}
+          maxLength="20"
+        ></input>
+      </div>
         <button
           style={{ width: "100px", height: "100%" }}
           type="button"
@@ -187,6 +199,7 @@ function App() {
         >
           Guardar
         </button>
+        </>
       );
     }
   }
@@ -207,6 +220,7 @@ function App() {
 
   const enviar = async () => {
     console.log(cedula)
+    setobservacion((observacion =""));
     if (cedula == "") {
       openModal();
       setestadoboton(true);
@@ -430,17 +444,7 @@ function App() {
             ></input>
         
           </div>
-          <div className="p-2 bd-highlight">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="OBSERVACIONES"
-              aria-label="# Placa"
-              aria-describedby="basic-addon1"
-              onChange={observacionChange}
-              maxLength="20"
-            ></input>
-          </div>
+          
           <div className="p-2 bd-highlight">
             <button
               style={{ width: "100px", height: "100%" }}
@@ -505,7 +509,7 @@ NOMBRE COMPLETO / <a className="alert-link">{nombre}</a>
                   <th>{persona.folio}</th>
                   <th>{persona.nombrecompleto}</th>
                   <td>{persona.cedula}</td>
-                  <td>{persona.departamtento}</td>
+                  <td>{persona.departamento}</td>
                   <td>{persona.municipio}</td>
                   <td>{persona.puesto}</td>
                   <td>{persona.direccion}</td>
@@ -538,6 +542,7 @@ NOMBRE COMPLETO / <a className="alert-link">{nombre}</a>
         >
           <h2>{modalmensaje}</h2>
           <p>{modalmensajedos}</p>
+        
           {renderboton()}
           {renderboton2()}
 
