@@ -176,6 +176,18 @@ function App() {
     closeModal();
     setestadoboton(false);
   }
+  function renderbotonnombre() {
+    return (
+    <button
+    style={{ width: "100px", height: "100%" }}
+    type="button"
+    className="btn btn-dark"
+    onClick={() => enviarnombre()}
+  >
+    Buscar nombre
+  </button>
+    )
+  }
   function renderboton() {
     if (estadoboton == true) {
       return (
@@ -217,8 +229,30 @@ function App() {
       );
     }
   }
+  const enviarnombre = async () => {
+    setnombre(null)
+    setmodalmensajedos("")
+    setmodalmensaje("Buscando nombre, espere unos segundos...");
+  
 
+    console.log("opción Nombre")
+    var params = {
+      cedula: cedula
+    }
+    ///'+ this.selectedRoute
+  
+      await axios.post(
+
+        enviroments.backendUrl + "/api/consulta/nombre/",
+        params,
+        config
+      ).then(response => setnombre(response.data));
+      setmodalmensaje("");
+      setmodalmensajedos("Terminado")
+  }
   const enviar = async () => {
+    setlugar([null, null, null, null, null, null]);
+    setnombre(null)
     console.log(cedula)
     setobservacion((observacion =""));
     if (cedula == "") {
@@ -460,8 +494,7 @@ function App() {
       </div>
       <div className="container">
    
-
-<div className="alert alert-primary" role="alert">
+      <div className="alert alert-primary" role="alert">
 <div className="d-flex justify-content-between">
 <div className="" role="alert">
 NOMBRE COMPLETO / <a className="alert-link">{nombre}</a>
@@ -483,6 +516,7 @@ NOMBRE COMPLETO / <a className="alert-link">{nombre}</a>
 </div>
 </div>
 </div>
+
 
 
         <table className="table">
@@ -540,9 +574,39 @@ NOMBRE COMPLETO / <a className="alert-link">{nombre}</a>
           style={customStyles}
           shouldCloseOnOverlayClick={false}
         >
+          <div className="alert alert-primary" role="alert">
+<div className="d-flex justify-content-between">
+<div className="d-flex flex-column">
+<div className="" role="alert">
+NOMBRE COMPLETO / <a className="alert-link">{nombre}</a>
+</div>
+<br></br>
+<br></br>
+<div className="" >
+{renderbotonnombre()}
+</div>
+</div>
+<div className="card" style={{width: '18rem'}}>
+  <ul className="list-group list-group-flush">
+    <li className="list-group-item">CEDULA / {lugar[0]} </li>
+    <li className="list-group-item">DEPARTAMENTO / {lugar[1]}</li>
+    <li className="list-group-item">MUNICIPIO / {lugar[2]}</li>
+  </ul>
+</div>
+
+<div className="card" style={{width: '18rem'}}>
+  <ul className="list-group list-group-flush">
+    <li className="list-group-item">PUESTO / {lugar[3]}</li>
+    <li className="list-group-item">DIRECCION / {lugar[4]}</li>
+    <li className="list-group-item">MESA / {lugar[5]}</li>
+  </ul>
+</div>
+</div>
+</div>
           <h2>{modalmensaje}</h2>
           <p>{modalmensajedos}</p>
-        
+         
+          
           {renderboton()}
           {renderboton2()}
 
