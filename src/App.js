@@ -9,6 +9,7 @@ function App() {
 
 
   var [cedula, setcedula] = useState("");
+  var [botonnombre, setbotonnombre] = useState(false);
   
   var [folio, setfolio] = useState("");
   var [observacion, setobservacion] = useState("");
@@ -177,6 +178,7 @@ function App() {
     setestadoboton(false);
   }
   function renderbotonnombre() {
+  if(botonnombre==false){
     return (
     <button
     style={{ width: "100px", height: "100%" }}
@@ -187,6 +189,7 @@ function App() {
     Buscar nombre
   </button>
     )
+   }
   }
   function renderboton() {
     if (estadoboton == true) {
@@ -230,6 +233,7 @@ function App() {
     }
   }
   const enviarnombre = async () => {
+    setbotonnombre(true);
     setnombre(null)
     setmodalmensajedos("")
     setmodalmensaje("Buscando nombre, espere unos segundos...");
@@ -249,6 +253,7 @@ function App() {
       ).then(response => setnombre(response.data));
       setmodalmensaje("");
       setmodalmensajedos("Terminado")
+      setbotonnombre(false);
   }
   const enviar = async () => {
     setlugar([null, null, null, null, null, null]);
