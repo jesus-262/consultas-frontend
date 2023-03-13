@@ -203,7 +203,7 @@ function App() {
           aria-label="# Placa"
           aria-describedby="basic-addon1"
           onChange={observacionChange}
-          maxLength="20"
+          maxLength="40"
         ></input>
       </div>
         <button
