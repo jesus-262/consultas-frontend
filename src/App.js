@@ -14,7 +14,7 @@ function App() {
   var [folio, setfolio] = useState("");
   var [observacion, setobservacion] = useState("");
   var [estadon, setestadon] = useState(false);
-  var [estadol, setestadol] = useState(false);
+  var [estadol, setestadol] = useState(true);
 
   Modal.setAppElement("body");
   var [modalIsOpen, setIsOpen] = useState(false);
@@ -97,7 +97,11 @@ function App() {
     console.log("observacion : " + e.target.value);
     setobservacion((observacion =e.target.value));
   };
-  
+  const nombreChange= async (e) => {
+    e.preventDefault();
+    console.log("nombre : " + e.target.value);
+    setnombre((nombre =e.target.value));
+  };
   const onChangeNombre = async (e) => {
     console.log("Nombre");
     setestadon(estadon = !estadon);
@@ -112,7 +116,7 @@ function App() {
    console.log("folio")
    console.log(folio)
     var params = {
-      folio,
+      folio:"",
       nombrecompleto: nombre,
       cedula,
       observacion,
@@ -444,23 +448,24 @@ function App() {
       <br></br>
 
       <div className="container">
+        {/*
         <div className="form-check" onChange={onChangeNombre} >
           <input className="form-check-input" type="checkbox" value={estadon} id="flexCheckIndeterminate"></input>
           <label className="form-check-label" htmlFor="flexCheckIndeterminate">
             Nombre
           </label>
-        </div>
+  </div>
         <div className="form-check" onChange={onChangeLugardevotacion}>
           <input className="form-check-input" type="checkbox" value={estadol} id="flexCheckIndeterminate"></input>
           <label className="form-check-label" htmlFor="flexCheckIndeterminate">
             Lugar de votacion
           </label>
-        </div>
+        </div>*/}
       </div>
       <div className="page-hero d-flex align-items-center justify-content-center">
         <div className="d-flex flex-column bd-highlight mb-3">
         <div className="d-flex flex-row bd-highlight mb-3">
-        <div className="p-2 bd-highlight">
+        {/*<div className="p-2 bd-highlight">
             <input
               type="number"
               className="form-control"
@@ -470,7 +475,7 @@ function App() {
               onChange={folioChange}
               maxLength="20"
             ></input>
-          </div>
+          </div>*/}
           <div className="p-2 bd-highlight">
             <input
               type="number"
@@ -502,7 +507,7 @@ function App() {
       <div className="alert alert-primary" role="alert">
 <div className="d-flex justify-content-between">
 <div className="" role="alert">
-NOMBRE COMPLETO / <a className="alert-link">{nombre}</a>
+NOMBRE COMPLETO / <a className="alert-link"> {nombre}</a>
 </div>
 <div className="card" style={{width: '18rem'}}>
   <ul className="list-group list-group-flush">
@@ -583,7 +588,15 @@ NOMBRE COMPLETO / <a className="alert-link">{nombre}</a>
 <div className="d-flex justify-content-between">
 <div className="d-flex flex-column">
 <div className="" role="alert">
-NOMBRE COMPLETO / <a className="alert-link">{nombre}</a>
+NOMBRE COMPLETO / {<input
+          type="text"
+          className="form-control"
+          defaultValue={nombre}
+          aria-label="# Placa"
+          aria-describedby="basic-addon1"
+          onChange={nombreChange}
+          maxLength="40"
+        ></input>}
 </div>
 <br></br>
 <br></br>
