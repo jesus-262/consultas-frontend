@@ -13,8 +13,8 @@ function App() {
   
   var [folio, setfolio] = useState("");
   var [observacion, setobservacion] = useState("");
-  var [estadon, setestadon] = useState(false);
-  var [estadol, setestadol] = useState(true);
+  var [estadon, setestadon] = useState(true);
+  var [estadol, setestadol] = useState(false);
 
   Modal.setAppElement("body");
   var [modalIsOpen, setIsOpen] = useState(false);
@@ -184,14 +184,24 @@ function App() {
   function renderbotonnombre() {
   if(botonnombre==false){
     return (
+      <>
     <button
+    style={{ width: "100px", height: "100%" }}
+    type="button"
+    className="btn btn-dark"
+    onClick={() => enviarlugar()}
+  >
+    Buscar Lugar de votacion
+  </button>
+  <button
     style={{ width: "100px", height: "100%" }}
     type="button"
     className="btn btn-dark"
     onClick={() => enviarnombre()}
   >
-    Buscar nombre
+    Buscar Nombre
   </button>
+  </>
     )
    }
   }
@@ -236,6 +246,64 @@ function App() {
       );
     }
   }
+  const enviarprocuraduria = async () => {
+    setbotonnombre(true);
+    setnombre(null)
+    setmodalmensajedos("")
+    setmodalmensaje("Buscando nombre, espere unos segundos...");
+  
+
+    console.log("opción Nombre")
+    var params = {
+      cedula: cedula
+    }
+    ///'+ this.selectedRoute
+  
+      await axios.post(
+
+        enviroments.backendUrl + "/api/consulta/postprocuraduria/",
+        params,
+        config
+      ).then(response => setnombre(response.data));
+      setmodalmensaje("");
+      setmodalmensajedos("Terminado")
+      setbotonnombre(false);
+  }
+  const enviarlugar = async () => {
+    setbotonnombre(true);
+    console.log("opción Lugar de votacion")
+    
+    
+    setmodalmensaje("Buscando el lugar de votacion, espere unos segundos...");
+
+    var params = {
+      cedula: cedula
+    }
+    ///'+ this.selectedRoute
+    var confuguracion = (config) =>
+      axios.post(
+
+        enviroments.backendUrl + "/api/consulta/lugar",
+        params,
+        config
+      ).then(response => setlugar(response.data));
+    // setlugar(response
+    confuguracion({
+
+      onDownloadProgress: (progressEvent) => {
+        const percentage = Math.round(
+          (progressEvent.loaded * 100) / progressEvent.total
+        );
+
+        if (percentage == 100) {
+          console.log("ter")
+          setmodalmensaje("Busqueda terminada");
+          setestadoboton(true);
+        }
+      }
+    });
+    console.log(lugar)
+  }
   const enviarnombre = async () => {
     setbotonnombre(true);
     setnombre(null)
@@ -251,7 +319,7 @@ function App() {
   
       await axios.post(
 
-        enviroments.backendUrl + "/api/consulta/nombre/",
+        enviroments.backendUrl + "/api/consulta/nombre",
         params,
         config
       ).then(response => setnombre(response.data));
@@ -259,11 +327,15 @@ function App() {
       setmodalmensajedos("Terminado")
       setbotonnombre(false);
   }
+  
   const enviar = async () => {
     setlugar([null, null, null, null, null, null]);
+    setbotonnombre(true);
     setnombre(null)
     console.log(cedula)
+   
     setobservacion((observacion =""));
+   
     if (cedula == "") {
       openModal();
       setestadoboton(true);
@@ -325,7 +397,15 @@ function App() {
             enviroments.backendUrl + "/api/consulta/nombre/",
             params,
             config
-          ).then(response => setnombre(response.data));
+          ).then(async (response) => {setnombre(response.data)
+          if(response.data=='FALLO TRAER CEDULA, INTENTE DE NUEVO' ||response.data=='EL NÚMERO DE IDENTIFICACIÓN INGRESADO NO SE ENCUENTRA REGISTRADO EN EL SISTEMA.'){
+            setlugar(['X', 'X', 'X', 'X', 'X', 'X']);
+          }else{
+            setlugar([null, null, null, null, null, null]);
+          }
+         
+          setbotonnombre(false);
+          });
 
         confuguracion({
 
@@ -340,16 +420,10 @@ function App() {
               setestadoboton(true);
             }
           }
+     
         });
 
-        /*
-        const config = {
-          onUploadProgress: (progressEvent) => console.log(progressEvent.loaded)
-        };
-        const dato = await axios.post(
-          enviroments.backendUrl + "/api/consulta/nombre",
-          params,config);
-          console.log(dato);*/
+     
       }
       if (estadol == true && estadon == true) {
         var estado = 0;
@@ -435,13 +509,15 @@ function App() {
         });
 
       }
-
+ 
 
     }
 
 
   }
-  return (
+  
+  
+   return (
     <>
       <br></br>
       <br></br>
@@ -586,9 +662,10 @@ NOMBRE COMPLETO / <a className="alert-link"> {nombre}</a>
         >
           <div className="alert alert-primary" role="alert">
 <div className="d-flex justify-content-between">
-<div className="d-flex flex-column">
-<div className="" role="alert">
+<div className="d-flex flex-column" style={{width:"40%"}}>
+<div className="" role="alert" >
 NOMBRE COMPLETO / {<input
+          
           type="text"
           className="form-control"
           defaultValue={nombre}
