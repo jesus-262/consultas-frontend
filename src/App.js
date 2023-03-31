@@ -14,7 +14,7 @@ function App() {
   var [folio, setfolio] = useState("");
   var [observacion, setobservacion] = useState("");
   var [estadon, setestadon] = useState(true);
-  var [estadol, setestadol] = useState(false);
+  var [estadol, setestadol] = useState(true);
 
   Modal.setAppElement("body");
   var [modalIsOpen, setIsOpen] = useState(false);
@@ -185,6 +185,7 @@ function App() {
   if(botonnombre==false){
     return (
       <>
+      {/* 
     <button
     style={{ width: "100px", height: "100%" }}
     type="button"
@@ -192,7 +193,7 @@ function App() {
     onClick={() => enviarlugar()}
   >
     Buscar Lugar de votacion
-  </button>
+  </button>*/}
   <button
     style={{ width: "100px", height: "100%" }}
     type="button"
@@ -398,11 +399,13 @@ function App() {
             params,
             config
           ).then(async (response) => {setnombre(response.data)
+            /*
           if(response.data=='FALLO TRAER CEDULA, INTENTE DE NUEVO' ||response.data=='EL NÚMERO DE IDENTIFICACIÓN INGRESADO NO SE ENCUENTRA REGISTRADO EN EL SISTEMA.'){
             setlugar(['X', 'X', 'X', 'X', 'X', 'X']);
           }else{
             setlugar([null, null, null, null, null, null]);
           }
+          */
          
           setbotonnombre(false);
           });
@@ -505,7 +508,9 @@ function App() {
                 setestadoboton(true);
               }
             }
+            setbotonnombre(false);
           }
+         
         });
 
       }
