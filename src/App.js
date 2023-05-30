@@ -169,6 +169,13 @@ function App() {
     await axios.delete(enviroments.backendUrl + "/api/delete/" + id);
     mostrar();
   }
+  const Nombrenocoincide = async () => {
+    // console.log(id.id);
+    console.log("Nombre no coincide")
+    setobservacion((observacion ="Nombre no coincide"));
+   
+  }
+  
   const CerrarModal = async () => {
     setmodalmensajedos("");
     Guardar();
@@ -219,6 +226,7 @@ function App() {
           aria-describedby="basic-addon1"
           onChange={observacionChange}
           maxLength="40"
+          value={observacion}
         ></input>
       </div>
         <button
@@ -236,6 +244,7 @@ function App() {
   function renderboton2() {
     if (estadoboton == true) {
       return (
+        <>
         <button
           style={{ width: "100px", height: "100%" }}
           type="button"
@@ -244,6 +253,14 @@ function App() {
         >
           Salir
         </button>
+          <button
+          style={{ width: "400px", height: "100%" }}
+          type="button"
+          className="btn btn-danger"
+          onClick={() => Nombrenocoincide()}
+        >
+          Nombre no coincide
+        </button></>
       );
     }
   }
