@@ -229,6 +229,16 @@ function App() {
           value={observacion}
         ></input>
       </div>
+      <button
+          style={{ width: "250px", height: "100%" }}
+          type="button"
+          className="btn btn-info"
+          onClick={() => Nombrenocoincide()}
+        >
+          Nombre no coincide
+        </button>
+        <br></br>
+        <br></br>
         <button
           style={{ width: "100px", height: "100%" }}
           type="button"
@@ -253,14 +263,8 @@ function App() {
         >
           Salir
         </button>
-          <button
-          style={{ width: "400px", height: "100%" }}
-          type="button"
-          className="btn btn-danger"
-          onClick={() => Nombrenocoincide()}
-        >
-          Nombre no coincide
-        </button></>
+       
+          </>
       );
     }
   }
