@@ -20,7 +20,7 @@ function App() {
   var [modalIsOpen, setIsOpen] = useState(false);
   var [modalmensaje, setmodalmensaje] = useState(false);
   var [modalmensajedos, setmodalmensajedos] = useState();
-  var [estadoboton, setestadoboton] = useState(false);
+  var [estadoboton, setestadoboton] = useState(true);
 
   var [nombre, setnombre] = useState(null);
   var [lugar, setlugar] = useState([
@@ -181,12 +181,12 @@ function App() {
     Guardar();
     mostrar();
     closeModal();
-    setestadoboton(false);
+    setestadoboton(true);
   }
   const CerrarModal2= async () => {
     setmodalmensajedos("");
     closeModal();
-    setestadoboton(false);
+    setestadoboton(true);
   }
   function renderbotonnombre() {
   if(botonnombre==false){
